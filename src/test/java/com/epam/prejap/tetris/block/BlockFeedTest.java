@@ -1,8 +1,10 @@
 package com.epam.prejap.tetris.block;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,37 @@ public class BlockFeedTest {
                 .stream()
                 .map(Supplier::get)
                 .filter(e -> e instanceof LBlock)
+                .collect(Collectors.toList());
+
+        //then
+        assertEquals(blocks.size(), 1);
+    }
+
+    @Test
+    public void shallContainJBlock() {
+        //given
+        BlockFeed feed = new BlockFeed();
+
+        //when
+        boolean containsJBlock = feed.blocks()
+                .stream()
+                .map(Supplier::get)
+                .anyMatch(e -> e instanceof JBlock);
+
+        //then
+        assertTrue(containsJBlock);
+    }
+
+    @Test(dependsOnMethods = "shallContainJBlock")
+    public void shallContainOnlyOneJBlock() {
+        //given
+        BlockFeed feed = new BlockFeed();
+
+        //when
+        List<Block> blocks = feed.blocks()
+                .stream()
+                .map(Supplier::get)
+                .filter(e -> e instanceof JBlock)
                 .collect(Collectors.toList());
 
         //then
