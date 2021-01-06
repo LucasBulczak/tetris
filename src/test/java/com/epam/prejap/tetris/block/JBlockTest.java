@@ -24,4 +24,27 @@ public class JBlockTest {
         softAssert.assertTrue(actualCols == expectedImage[0].length);
         softAssert.assertAll("Shall create J block with correct dimensions, but did not");
     }
+
+    @Test(dataProvider = "dotsForJBlock")
+    public void shallCreateJBlockWithJShapedDots(int row, int col) {
+        //given
+        Block jBlock = new JBlock();
+        int dotMark = 1;
+
+        //when
+        byte actualDot = jBlock.dotAt(row, col);
+
+        //then
+        assertEquals(actualDot, dotMark, "Shall create J block with correct shaped dots, but did not");
+    }
+
+    @DataProvider()
+    public static Object[] dotsForJBlock() {
+        return new Object[][]{
+                {0, 1},
+                {1, 1},
+                {2, 0},
+                {2, 1},
+        };
+    }
 }
