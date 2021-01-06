@@ -38,6 +38,19 @@ public class JBlockTest {
         assertEquals(actualDot, dotMark, "Shall create J block with correct shaped dots, but did not");
     }
 
+    @Test(dataProvider = "emptySpacesForJBlock")
+    public void shallCreateJBlockWithCorrectEmptySpaces(int row, int col) {
+        //given
+        Block jBlock = new JBlock();
+        int emptyMark = 0;
+
+        //when
+        byte actualEmptySpace = jBlock.dotAt(row, col);
+
+        //then
+        assertEquals(actualEmptySpace, emptyMark, "Shall create J block with correct shaped empty marks, but did not");
+    }
+
     @DataProvider()
     public static Object[] dotsForJBlock() {
         return new Object[][]{
@@ -45,6 +58,14 @@ public class JBlockTest {
                 {1, 1},
                 {2, 0},
                 {2, 1},
+        };
+    }
+
+    @DataProvider()
+    public static Object[] emptySpacesForJBlock() {
+        return new Object[][]{
+                {0, 0},
+                {1, 0},
         };
     }
 }
