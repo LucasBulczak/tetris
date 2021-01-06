@@ -1,18 +1,19 @@
 package com.epam.prejap.tetris.block;
 
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.List;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Test(groups = "Block")
 public class BlockFeedTest {
+
+    private final String blockClassName;
+
+    public BlockFeedTest(String blockClassName) {
+        this.blockClassName = blockClassName;
+    }
 
     @Test
     public void shallContainLBlock() {
@@ -23,7 +24,7 @@ public class BlockFeedTest {
         boolean containsLBlock = feed.blocks()
                 .stream()
                 .map(Supplier::get)
-                .anyMatch(e -> e instanceof LBlock);
+                .anyMatch(this::isInstanceOf);
 
         //then
         assertTrue(containsLBlock);
@@ -35,44 +36,17 @@ public class BlockFeedTest {
         BlockFeed feed = new BlockFeed();
 
         //when
-        List<Block> blocks = feed.blocks()
+        var numOfBlocks = feed.blocks()
                 .stream()
                 .map(Supplier::get)
-                .filter(e -> e instanceof LBlock)
-                .collect(Collectors.toList());
+                .filter(this::isInstanceOf)
+                .count();
 
         //then
-        assertEquals(blocks.size(), 1);
+        assertEquals(numOfBlocks, 1);
     }
 
-    @Test
-    public void shallContainJBlock() {
-        //given
-        BlockFeed feed = new BlockFeed();
-
-        //when
-        boolean containsJBlock = feed.blocks()
-                .stream()
-                .map(Supplier::get)
-                .anyMatch(e -> e instanceof JBlock);
-
-        //then
-        assertTrue(containsJBlock);
-    }
-
-    @Test(dependsOnMethods = "shallContainJBlock")
-    public void shallContainOnlyOneJBlock() {
-        //given
-        BlockFeed feed = new BlockFeed();
-
-        //when
-        List<Block> blocks = feed.blocks()
-                .stream()
-                .map(Supplier::get)
-                .filter(e -> e instanceof JBlock)
-                .collect(Collectors.toList());
-
-        //then
-        assertEquals(blocks.size(), 1);
+    private boolean isInstanceOf(Block e) {
+        return e.getClass().getSimpleName().equals(blockClassName);
     }
 }
