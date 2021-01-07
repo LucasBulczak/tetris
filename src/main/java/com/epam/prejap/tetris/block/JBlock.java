@@ -2,7 +2,6 @@ package com.epam.prejap.tetris.block;
 
 /**
  * The JBlock class represents "J" shaped block in tetris game.
- * <p><br>
  *
  * @author Łukasz Bulczak
  */
