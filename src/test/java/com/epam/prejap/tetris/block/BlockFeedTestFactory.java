@@ -22,9 +22,9 @@ public class BlockFeedTestFactory {
     @Factory
     public Object[] factoryMethod() {
         return new Object[]{
-                new BlockFeedTest(LBlock.class.getSimpleName()),
-                new BlockFeedTest(OBlock.class.getSimpleName()),
-                new BlockFeedTest(JBlock.class.getSimpleName()),
+                new BlockFeedTest(LBlock.class),
+                new BlockFeedTest(OBlock.class),
+                new BlockFeedTest(JBlock.class),
         };
     }
 }

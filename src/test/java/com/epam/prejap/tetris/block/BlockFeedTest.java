@@ -9,10 +9,10 @@ import static org.testng.Assert.*;
 @Test(groups = "Block")
 public class BlockFeedTest {
 
-    private final String blockClassName;
+    private final Class<? extends Block> blockChildClass;
 
-    public BlockFeedTest(String blockClassName) {
-        this.blockClassName = blockClassName;
+    public BlockFeedTest(Class<? extends Block> blockChildClass) {
+        this.blockChildClass = blockChildClass;
     }
 
     @Test
@@ -24,7 +24,7 @@ public class BlockFeedTest {
         boolean containsLBlock = feed.blocks()
                 .stream()
                 .map(Supplier::get)
-                .anyMatch(this::isInstanceOf);
+                .anyMatch(blockChildClass::isInstance);
 
         //then
         assertTrue(containsLBlock);
@@ -39,14 +39,10 @@ public class BlockFeedTest {
         var numOfBlocks = feed.blocks()
                 .stream()
                 .map(Supplier::get)
-                .filter(this::isInstanceOf)
+                .filter(blockChildClass::isInstance)
                 .count();
 
         //then
         assertEquals(numOfBlocks, 1);
-    }
-
-    private boolean isInstanceOf(Block e) {
-        return e.getClass().getSimpleName().equals(blockClassName);
     }
 }
