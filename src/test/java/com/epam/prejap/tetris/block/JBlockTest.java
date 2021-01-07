@@ -20,8 +20,14 @@ public class JBlockTest {
         int actualCols = jBlock.cols;
 
         //then
-        softAssert.assertTrue(actualRows == expectedImage.length);
-        softAssert.assertTrue(actualCols == expectedImage[0].length);
+        softAssert.assertEquals(actualRows, expectedImage.length,
+                String.format("The expected height for a J-shaped block should be %d, but was %d.",
+                        expectedImage.length, actualRows));
+
+        softAssert.assertEquals(actualCols, expectedImage[0].length,
+                String.format("The expected width for a J-shaped block should be %d, but was %d.",
+                        expectedImage[0].length, actualCols));
+
         softAssert.assertAll("Shall create J block with correct dimensions, but did not");
     }
 
