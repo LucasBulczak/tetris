@@ -16,7 +16,7 @@ public class BlockFeedTest {
     }
 
     @Test
-    public void shallContainLBlock() {
+    public void shallContainSpecificBlock() {
         //given
         BlockFeed feed = new BlockFeed();
 
@@ -30,8 +30,8 @@ public class BlockFeedTest {
         assertTrue(containsLBlock);
     }
 
-    @Test(dependsOnMethods = "shallContainLBlock")
-    public void shallContainOnlyOneLBlock() {
+    @Test(dependsOnMethods = "shallContainSpecificBlock")
+    public void shallContainOnlyOneBlockOfThatType() {
         //given
         BlockFeed feed = new BlockFeed();
 
