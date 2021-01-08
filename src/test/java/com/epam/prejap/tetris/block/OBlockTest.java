@@ -1,5 +1,6 @@
 package com.epam.prejap.tetris.block;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -31,4 +32,26 @@ public class OBlockTest {
         softAssert.assertAll("Shall create O block with correct dimensions, but did not");
     }
 
+    @Test(dataProvider = "dotsForOBlock")
+    public void shallCreateOBlockWithOShapedDots(int row, int col) {
+        //given
+        Block oBlock = new OBlock();
+        int dotMark = 1;
+
+        //when
+        byte actualDot = oBlock.dotAt(row, col);
+
+        //then
+        assertEquals(actualDot, dotMark, "Shall create O block with correct shaped dots, but did not");
+    }
+
+    @DataProvider()
+    public static Object[] dotsForOBlock() {
+        return new Object[][]{
+                {0, 0},
+                {0, 1},
+                {1, 0},
+                {1, 1},
+        };
+    }
 }
