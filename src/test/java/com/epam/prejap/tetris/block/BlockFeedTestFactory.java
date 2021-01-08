@@ -25,6 +25,7 @@ public class BlockFeedTestFactory {
                 new BlockFeedTest(LBlock.class),
                 new BlockFeedTest(OBlock.class),
                 new BlockFeedTest(JBlock.class),
+                new BlockFeedTest(IBlock.class),
         };
     }
 }
