@@ -1,7 +1,7 @@
 package com.epam.prejap.tetris.block;
 
 /**
- * O-shaped block implementation of the {@link Block} abstraction class.
+ * O-shaped block implementation of the {@link Block} abstract class.
  * <br>
  *
  * @author Pawel Kierat
