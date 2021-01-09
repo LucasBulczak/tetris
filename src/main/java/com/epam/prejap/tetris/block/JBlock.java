@@ -1,9 +1,12 @@
 package com.epam.prejap.tetris.block;
 
 /**
- * The JBlock class represents "J" shaped block in tetris game.
+ * J-shaped block implementation of the {@link Block} abstraction class.
+ * <br>
  *
  * @author Łukasz Bulczak
+ * @implNote This class implements static 2d array in order to create required "J" shape block.
+ * @see Block
  */
 final class JBlock extends Block {
 
