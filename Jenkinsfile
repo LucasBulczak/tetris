@@ -1,21 +1,22 @@
 pipeline {
     agent any
+    tools { 
+        maven 'Maven 3.3.9' 
+        jdk 'jdk8' 
+    }
     stages {
-        stage('Build') { 
+        stage ('Initialize') {
             steps {
-              echo 'building app...'
-                sh 'mvn -B -DskipTests clean package' 
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
             }
         }
-        stage('Test') {
+
+        stage ('Build') {
             steps {
-              echo 'testing app...'
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                echo 'This is a minimal pipeline.'
             }
         }
     }
