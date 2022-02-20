@@ -33,9 +33,10 @@ public class Playfield {
     public boolean move(Move move) {
         hide();
         boolean moved;
-        switch (move) {
-            case LEFT -> moveLeft();
-            case RIGHT -> moveRight();
+        if (move == Move.LEFT) {
+            moveLeft();
+        } else if (move == Move.RIGHT) {
+            moveRight();
         }
         moved = moveDown();
         show();
