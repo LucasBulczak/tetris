@@ -10,6 +10,8 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
+		    maven --version
+		    java --version
                 ''' 
             }
         }
@@ -26,7 +28,7 @@ pipeline {
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml' 
+		    archiveArtifacts artifacts: 'target/*.jar'
                 }
             }
         }
