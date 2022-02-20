@@ -10,8 +10,8 @@ pipeline {
                 sh '''
                     echo "PATH = ${PATH}"
                     echo "M2_HOME = ${M2_HOME}"
-		    maven --version
-		    java --version
+		    mvn -version
+		    java -version
                 ''' 
             }
         }
